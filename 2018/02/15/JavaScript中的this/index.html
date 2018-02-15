@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        Retrospection的博客
+        JavaScript中的this · Retrospection的博客
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,11 +50,22 @@
     
 </head>
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Retrospection的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">JavaScript中的this</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Retrospection的博客</a>
 </header>
@@ -62,21 +73,37 @@
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            JavaScript中的this
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/02/15</span>
+            </div>
         
     </div>
 </div>
@@ -144,119 +171,34 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2018/02/15/JavaScript中的this/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>JavaScript中的this</span>
-                    </h2>
-                <div class="abstract-content">
-                    JavaScript 里有许多
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>JavaScript 里有许多</p>
 
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/15</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/28/配置阿里云服务器/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>配置阿里云服务器</span>
-                    </h2>
-                <div class="abstract-content">
-                    安装一堆乱七八糟的东西【？】123sudo apt-get install build-essentialsudo apt-get install htopsudo apt-get install zsh
-设置 Git123git config --global user.name ""git config --global user.email ""git config --global core.editor vim
-安装 node.js12345wget https://nodejs.org/dist/v8.9.1/node-v8.9.1-linux-x64.tar.xzxz -d...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 配置>配置</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 运维>运维</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/28</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/26/Boost递归遍历目录/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Boost递归遍历目录</span>
-                    </h2>
-                <div class="abstract-content">
-                    文件系统操作中，递归遍历某文件夹下所有的文件并得到路径是最常见的操作。由于 C++17 标准才将 filesystem 加入标准库，因此我们借助素有 “C++ 准标准库” 名号的 Boost 库来实现。
-实现如下：
-123456789101112131415161718192021222324252627#include &lt;iostream&gt;   // 依赖 cout 输出当前目录#include &lt;boost/filesystem.hpp&gt;   // 依赖 Boost 的 filesystem 库int main()&#123;  // 构建指向待遍历的目录的 ...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = C++>C++</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Boost>Boost</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/26</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/04/helloworld/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Hello World</span>
-                    </h2>
-                <div class="abstract-content">
-                    庆博客开张
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/11/28/配置阿里云服务器/" title= 配置阿里云服务器 >
+                    <span>Previous Post</span>
+                    <span>配置阿里云服务器</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/04</span>
-                </div>
-            </div>
-        </article>
+<!-- City版安装代码已完成 -->
     
-    <!-- paginator  -->
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
 </main>
             <!-- profile -->
@@ -310,6 +252,13 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
