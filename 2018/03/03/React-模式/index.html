@@ -1,20 +1,302 @@
-extends partial/layout
+<!DOCTYPE html>
+<html lang="en">
 
-block site_title
-    != page.title + " · " + config.title
+<!-- Head tag -->
+<head>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-block container
-    include mixins/post
-    +post(page)
+    <!--Description-->
+    
+        <meta name="description" content="原文链接：https://github.com/planningcenter/react-patterns
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+本文关注的领域本文主要聚焦于在 Rails 书写 React 代码的方式。我们努力地去寻找 React 的最佳实践。本文列举出了许多探索中失败的尝试。如果你在开发过程中遇到了一些不协调的地方">
+    
 
-block copyright
-    include partial/copyright
+    <!--Author-->
+    
+        <meta name="author" content="Retros">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="React 模式"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Retrospection的博客"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>React 模式 - Retrospection的博客</title>
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<!-- Main Content -->
+<!-- Banner -->
+<!-- Banner -->
+<div class="w-100 bg-1 ph5-ns ph3 text-light">
+    
+    <nav class="db dt-l w-100 mw8 center border-box pv3">
+        <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/" title="Retrospection的博客">
+            <img src="http://www.codeblocq.com/assets/projects/hexo-theme-anodyne/assets/anodyne.svg" class="dib h3" alt="Retrospection的博客">
+        </a>
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/" 
+                    title="Home">
+                    Home
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/archives" 
+                    title="Archives">
+                    Archives
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/about.html" 
+                    title="About">
+                    About
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/contact.html" 
+                    title="Contact">
+                    Contact
+                </a>
+            
+        </div>
+    </nav>
+
+    <!-- Title -->
+    <div class="w-100 mw8 center vh-40 dt">
+        <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns">React 模式</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2018-03-03</p>
+        </div>
+    </div>
+
+    <!-- Icon -->
+    <div class="relative w-100 mw8 center white dn dn-m db-ns">
+        <i class="header-icon fa fa-file-text-o"></i>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
+    <div class="content">
+        <div class="mw8 center">
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+
+                    <!-- Main Post Content -->
+                    <blockquote>
+<p>原文链接：<a href="https://github.com/planningcenter/react-patterns" target="_blank" rel="external">https://github.com/planningcenter/react-patterns</a></p>
+</blockquote>
+<h1 id="本文关注的领域"><a href="#本文关注的领域" class="headerlink" title="本文关注的领域"></a>本文关注的领域</h1><p>本文主要聚焦于在 <code>Rails</code> 书写 <code>React</code> 代码的方式。我们努力地去寻找 React 的最佳实践。本文列举出了许多探索中失败的尝试。如果你在开发过程中遇到了一些不协调的地方，这可能就是一个可能去优化和改进的地方。请让我们知道你的发现。</p>
+<p>本文中所有例子都使用了 <code>ES2015</code> 标准进行书写，然后用 <code>babel</code> 进行转义。</p>
+<h2 id="Component-Organization（组件组织）"><a href="#Component-Organization（组件组织）" class="headerlink" title="Component Organization（组件组织）"></a>Component Organization（组件组织）</h2><ul>
+<li><p>class definition</p>
+<ul>
+<li>constructor<ul>
+<li>event handlers</li>
+</ul>
+</li>
+<li>‘component’ lifecycle events</li>
+<li>getters</li>
+<li>render</li>
+</ul>
+</li>
+<li><p>defaultProps</p>
+</li>
+<li>proptypes</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span> (props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">smiling</span>: <span class="literal">false</span> &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.handleClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">this</span>.setState(&#123;<span class="attr">smiling</span>: !<span class="keyword">this</span>.state.smiling&#125;);</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentWillMount () &#123;</div><div class="line">    <span class="comment">// add event listeners (Flux Store, WebSocket, document, etc.)</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentDidMount () &#123;</div><div class="line">    <span class="comment">// React.getDOMNode()</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentWillUnmount () &#123;</div><div class="line">    <span class="comment">// remove event listeners (Flux Store, WebSocket, document, etc.)</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  get smilingMessage () &#123;</div><div class="line">    <span class="keyword">return</span> (<span class="keyword">this</span>.state.smiling) ? <span class="string">"is smiling"</span> : <span class="string">""</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  render () &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div onClick=&#123;<span class="keyword">this</span>.handleClick&#125;&gt;</div><div class="line">        &#123;<span class="keyword">this</span>.props.name&#125; &#123;<span class="keyword">this</span>.smilingMessage&#125;</div><div class="line">      &lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">    );</span></div><div class="line"><span class="regexp">  &#125;</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">Person.defaultProps = &#123;</span></div><div class="line"><span class="regexp">  name: 'Guest'</span></div><div class="line"><span class="regexp">&#125;;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">Person.propTypes = &#123;</span></div><div class="line"><span class="regexp">  name: React.PropTypes.string</span></div><div class="line"><span class="regexp">&#125;;</span></div></pre></td></tr></table></figure>
+<h2 id="Formatting-Props（格式化-Props）"><a href="#Formatting-Props（格式化-Props）" class="headerlink" title="Formatting Props（格式化 Props）"></a>Formatting Props（格式化 Props）</h2><p>将多于两个的 <code>props</code> 组织到单独的行里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line">&lt;Person</div><div class="line"> firstName=<span class="string">"Michael"</span> /&gt;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line">&lt;Person firstName=<span class="string">"Michael"</span> /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line">&lt;Person firstName=<span class="string">"Michael"</span> lastName=<span class="string">"Chan"</span> occupation=<span class="string">"Designer"</span> favoriteFood=<span class="string">"Drunken Noodles"</span> /&gt;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line">&lt;Person</div><div class="line"> firstName=<span class="string">"Michael"</span></div><div class="line"> lastName=<span class="string">"Chan"</span></div><div class="line"> occupation=<span class="string">"Designer"</span></div><div class="line"> favoriteFood=<span class="string">"Drunken Noodles"</span> /&gt;</div></pre></td></tr></table></figure>
+<h2 id="Computed-Props（计算属性）"><a href="#Computed-Props（计算属性）" class="headerlink" title="Computed Props（计算属性）"></a>Computed Props（计算属性）</h2><p>使用 <code>getter</code> 函数命名计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bad</span></div><div class="line">firstAndLastName () &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.props.firstName&#125;</span> <span class="subst">$&#123;<span class="keyword">this</span>.props.lastName&#125;</span>`</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// good</span></div><div class="line">get fullName () &#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.props.firstName&#125;</span> <span class="subst">$&#123;<span class="keyword">this</span>.props.lastName&#125;</span>`</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>See: <a href="https://github.com/planningcenter/react-patterns#cached-state-in-render" target="_blank" rel="external">Cached State in render</a> anti-pattern</p>
+<p>（未完待续..）</p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+
+                    <!-- Comments -->
+                    
+
+
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="Retros">
+        </div>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            My name is Jonathan Klughertz and this is my blog.<br>I am a full stack software engineer with a strong front-end focus.<br> I currently live and work in Singapore, hit me up if you are in the region.
+        </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts</h3>
+    
+        <p>
+            <a href="/2018/03/03/React-模式/">React 模式</a>
+        </p>
+    
+        <p>
+            <a href="/2018/02/15/JavaScript中的this/">JavaScript中的this</a>
+        </p>
+    
+        <p>
+            <a href="/2017/11/28/配置阿里云服务器/">配置阿里云服务器</a>
+        </p>
+    
+        <p>
+            <a href="/2017/11/26/Boost递归遍历目录/">Boost递归遍历目录</a>
+        </p>
+    
+        <p>
+            <a href="/2017/11/04/helloworld/">Hello World</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div class="bg-1 ph2 ph5-ns pv5">
+        <div class="mv8">
+            <div class="center tc">
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://twitter.com/?lang=en" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.facebook.com/" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://dribbble.com/" target="_blank">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://github.com/klugjo/hexo-theme-anodyne" target="_blank">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://plus.google.com/" target="_blank">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.behance.net/" target="_blank">
+                            <i class="fa fa-behance"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://500px.com/" target="_blank">
+                            <i class="fa fa-500px"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:test@example.com" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/#" target="_blank">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                
+            </div>
+            <div class="f6 f5-ns center tc white pt5 fw3">
+                @Untitled. All right reserved | Design & Hexo <a class="link dim white" href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+            </div>
+        </div>
+    </div>
+
+<!-- After Footer -->
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
