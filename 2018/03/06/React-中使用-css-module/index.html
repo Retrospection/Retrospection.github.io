@@ -11,7 +11,7 @@
     <!--Description-->
     
         <meta name="description" content="使用 Create-React-App 创建项目123$ create-react-app my-project$ cd my-project$ npm run start
-这样，React 项目就新建好了，此时的 webpack 配置是隐藏的，如果需要启用 css-module，我们必须使用 e">
+这样，React 项目就新建好了, 此时的 webpack 配置是隐藏的，如果需要启用 css-module，我们必须使用 ">
     
 
     <!--Author-->
@@ -133,9 +133,9 @@
 
                     <!-- Main Post Content -->
                     <h1 id="使用-Create-React-App-创建项目"><a href="#使用-Create-React-App-创建项目" class="headerlink" title="使用 Create-React-App 创建项目"></a>使用 Create-React-App 创建项目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ create-react-app my-project</div><div class="line">$ cd my-project</div><div class="line">$ npm run start</div></pre></td></tr></table></figure>
-<p>这样，React 项目就新建好了，此时的 webpack 配置是隐藏的，如果需要启用 css-module，我们必须使用 <code>eject</code> 命令使其暴露出来。</p>
+<p>这样，React 项目就新建好了, 此时的 <code>webpack</code> 配置是隐藏的，如果需要启用 css-module，我们必须使用 <code>eject</code> 命令使其暴露出来。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm run eject</div></pre></td></tr></table></figure>
-<p>运行完 <code>eject</code> 命令后，能够看到在 my-project 目录下多了两个文件夹，<code>config</code> 和 <code>scripts</code>，其中 <code>config</code> 文件夹中存放了开发和部署所使用的两套 webpack 配置，分别命名为 <code>webpack.config.dev.js</code> 和 <code>webpack.config.prod.js</code></p>
+<p>运行完 <code>eject</code> 命令后，能够看到在 my-project 目录下多了两个文件夹，<code>config</code> 和 <code>scripts</code>，其中 <code>config</code> 文件夹中存放了开发和部署所使用的两套 <code>webpack</code> 配置，分别命名为 <code>webpack.config.dev.js</code> 和 <code>webpack.config.prod.js</code></p>
 <p>在这两个文件夹中找到如下所示的片段:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  ...</div><div class="line">  <span class="built_in">module</span>: &#123;</div><div class="line">    rules:[</div><div class="line">      ...</div><div class="line">          &#123;</div><div class="line">            test: <span class="regexp">/\.css$/</span>,</div><div class="line">            use: [</div><div class="line">              <span class="built_in">require</span>.resolve(<span class="string">'style-loader'</span>),</div><div class="line">              &#123;</div><div class="line">                loader: <span class="built_in">require</span>.resolve(<span class="string">'css-loader'</span>),</div><div class="line">                options: &#123;</div><div class="line">                  importLoaders: <span class="number">1</span>,</div><div class="line">                  <span class="built_in">module</span>: <span class="literal">true</span>,   <span class="comment">// 这里是我们修改的地方</span></div><div class="line">                  localIdentName: <span class="string">"[name]__[local]__[hash:base64:5]"</span></div><div class="line">                &#125;,</div><div class="line">              &#125;,</div><div class="line">            </div><div class="line">            ],</div><div class="line">          &#125;,</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><code>module</code> 字段是为了启用 css-module 功能，而 <code>localIdentName</code> 字段则是为了定制我们编译后的类名，方便我们从最终的结果中对文件进行定位。</p>
 <p>那么，webpack 配置好后，如何在 React 中进行使用呢？</p>
@@ -176,7 +176,7 @@
 
                     <!-- Widget 3: Recent Posts -->
                     <div class="mt5 tc tl-l">
-    <h3>Recent Posts</h3>
+    <h3>Récemment</h3>
     
         <p>
             <a href="/2018/03/06/React-中使用-css-module/">React 中使用 css-module</a>
