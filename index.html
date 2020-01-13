@@ -96,14 +96,273 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15788933924935.html">
+                <a class="clearlink" href="15788956558872.html">
                 
-                  <h1>测试文章</h1>
+                  <h1>前端组件单元测试</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>这是一篇测试文章</p>
+                        	<blockquote>
+<p>啥？单元测试？我哪有时间写单元测试？</p>
+</blockquote>
+
+<h2 id="toc_0">从软件质量说起</h2>
+
+<p>日常生活中，商品质量永远是我们进行选择时需要着重考虑的因素，计算机软件也不例外。优秀的软件应当如我们预期的一样工作，能够正确地处理所有功能性需求。优秀的软件应当如我们预期一样，持续稳定运行直到地老天荒。然而，现实生活中的软件似乎永远是那么脆弱不堪。Bug这个计算机行话随着普遍存在的计算机软件缺陷，逐渐变成了可能是被行外人最熟悉的词汇。由此可见，保障软件质量实在不是一件容易的事情。</p>
+
+<p>在改进软件质量这件事情上，人类付出了巨大的努力与探索。在一些最为关键的技术领域，比如分布式系统的一致性问题中，如 Amazon、Microsoft 等公司采用了形式化验证的方式检查软件系统的正确性。例如，<a href="http://lamport.azurewebsites.net/tla/formal-methods-amazon.pdf">这篇文章</a>介绍了 Amazon 如何利用 TLA+ 检查并发现 DynamoDB 中若干可以导致数据丢失的设计 bug。然而在更一般的场景中，我们并不需要动用形式化验证这种大杀器，而是采取软件测试的方式进行。</p>
+
+<h2 id="toc_1">到底软件测试是啥？</h2>
+
+<p>大部分人接触“软件测试”这个概念的时间远早于他们的预期。小时候的网络游戏，第一次向广大玩家普及了“内测”、“公测”这样的概念，虽然可能很多人都并不能意识到这个关乎软件测试，但这应该是大部分人第一次接触“软件测试”这个概念的契机。再往后，更多人是在本科阶段的《软件工程》这门课程中接触到软件测试。无论早期的瀑布开发模型亦或是后期的敏捷开发模型再到更现代的极限编程模型，软件测试都是软件开发生命周期中不可缺少的一环，书籍中都会对其进行详细的介绍。但，到底什么是软件测试呢？</p>
+
+<p>书本上对软件测试的正式定义形形色色，但这里我说说自己的理解。最广义的说，我们日常每次“运行”软件，其实就能看成一次测试；而最狭义的测试里，我们会定义软件的规格，定义软件的边界条件，书写测试用例，编写自动化测试代码或者以文档形式写出软件操作步骤，并交于专人验证开发人员提交的程序是否符合规格定义。但是，一般地说，验证软件行为是否符合需求的行为就叫做软件测试。</p>
+
+<p>由此可见，要理解软件测试，先要理解软件需求。</p>
+
+<h2 id="toc_2">功能性需求与非功能性需求</h2>
+
+<p>需求定义了软件。功能性需求和非功能性需求分别告诉开发者「做什么」和「做成什么样」。比如对于即时通信软件，「发送消息」、「接收消息」、「显示历史消息」等就属于功能性需求，他们定义了一个一个的功能点，而「软件崩溃率小于千分之一」，「能够支持多平台操作系统」等就属于非功能性需求。软件测试就是为了检验软件是否能满足定义的需求而进行的活动。</p>
+
+<h2 id="toc_3">为什么单元测试需要开发人员来写</h2>
+
+<p>在具有一定规模的软件开发组织中，必然有专业负责产品质量保证的QA团队，也即通常意义上的测试团队。他们对软件最终出产的质量负责，他们会针对软件发版时定格的需求，规划测试用例，进行手动、半自动或全自动测试。还会引入混沌工程，帮助找出一些常规测试手段与使用方法下无法发现的潜在故障。甚至还会找到目标用户，邀请他们试用软件产品，并鼓励他们帮助团队寻找软件中的潜藏缺陷。微软就曾经以巨额奖金召集广大用户向其提交使用过程中遇到的缺陷。</p>
+
+<p>那么，既然有如此专业的测试团队，为什么我们还需要让开发人员来写单元测试呢？</p>
+
+<h3 id="toc_4">单元测试能够帮助大中型系统快速迭代</h3>
+
+<p>对于大中型系统，多人协作与持续改进迭代是常态。一个经过长期迭代的大中型系统中包含了海量特性，这也就使得未来的迭代往往可能牵一发而动全身。尤其是当某个新增的功能点需要变更软件底层设计的时候，我们所做的修改很容易使得看上去相同的对外接口在一些特定条件下表现出不同的行为。具有单元测试的项目就可以在修改模块内部实现后，对模块对外表现的功能，尤其是需要满足的特定边界条件进行测试，从而很容易将隐藏其中的一些问题充分暴露出来。</p>
+
+<h3 id="toc_5">单元测试能够帮助开发人员改进软件设计</h3>
+
+<p>所有的自动化软件测试，最终都要落脚到断言上。那么为了使得被测试的程序可以被断言，开发人员不得不事前规划软件设计，使得每一个单元的关键执行结果都可被断言。因此，当开发人员注意到代码可测试性后，开发者就会对代码中每一个被测单元的输入与输出都非常清晰，依赖也变得清晰，无用的依赖会自然减少，软件设计变得凝练，可维护性增强。</p>
+
+<h2 id="toc_6">什么是前端的单元</h2>
+
+<p>在谈了测试的重要性以及单元测试为何需要开发人员编写之后，我们来看看什么是单元。单元测试位于所有测试的最底层，粒度最小，执行速度最快，通常由开发工程师编写并执行，那么对于前端开发来说，什么是「单元」？从目前主流的三大框架的视角看过去，前端的MVVM架构将前端应用分为了三块主要部分：View、Model和ViewModel，我们逐一来看：</p>
+
+<ul>
+<li>View层，JSX或者template，通常的表现形式为无状态组件或者纯函数式组件，给定Props的情况下一定会有相同的DOM或者VDOM被渲染出来。</li>
+<li>Model层，状态管理工具所处的位置，通常会利用Vuex、Redux、MobX、RxJS等工具进行编写，视图无关，通常从ViewModel中得到输入，执行一些副作用，或者将输出更新到ViewModel上。</li>
+<li>ViewModel层，通常与View层双向绑定，但是当View与其不能完美适配时，ViewModel层负责将数据依据View的需求进行转化，因此该层是大量工具函数的应用之处。如各种各样的Formatter、各种各样的Filter等往往位于这一层。</li>
+</ul>
+
+<p>从这里我们就能发现，前端的单元与后端不同，既有以类为单位的单元，也有以函数为单位的单元，也有以组件为单位的单元。而这三类不同领域的单元测试又各有特色，让我们逐一来看。</p>
+
+<h2 id="toc_7">测试三部曲</h2>
+
+<p>在具体讨论View、Model与ViewModel层的测试前，先说说单元测试中三个重要的组成部分。我们可以把单元测试想象成一场考试，一个一个代码单元就是这场考试中的考生，测试用例是考试的考题，预期结果是考试的答案。那么测试三部曲包括了考生、考题与答案，即被测代码、测试用例与预期结果。</p>
+
+<p>我个人认为，在测试三部曲中，测试用例占据了核心地位。测试用例是软件需求的具体表现形式，它以代码的形式具体地定义了软件需要支持的功能，应当做出的反应，需要考虑的边界条件。被测代码是测试三部曲必不可少的组成部分，也是我们工作的核心成果。而预期结果跟随测试用例，自然就会浮出水面。</p>
+
+<h2 id="toc_8">View层单元测试</h2>
+
+<p>A JavaScript library for building user interfaces，React的主页上如此介绍它自己，事实上也是如此。相较Vue和Angular，React确实专注于更好地进行View层的抽象，无论是提出View = f(props)的思想，还是单向数据流，都创造性地使得JavaScript构建稳定大型的富交互Web应用成为可能。我们以利用React构建的View层为例说明View层单元测试。</p>
+
+<h3 id="toc_9">View层单元测试的关注点</h3>
+
+<p>关于 View 层是否需要编写单元测试，一直有很大的争议。</p>
+
+<p>众所周知，端应用会随着需求不断迭代更新， View 层测试究竟测试到什么粒度是一个需要重点权衡的问题。如果测试粒度过细，往往不堪需求变更之扰，而如果测试粒度过粗，与无测试覆盖也并无差别。</p>
+
+<p>业界目前采用的实践，是对底层组件库如类似于 Antd 之类的，完全与业务无关，组成用户界面最基本单元的这些空间进行严格的单元测试。以 Antd 为例，所有的组件位于 Antd 工程目录的<code>components</code>文件夹下，每个组件目录下的测试都放在<code>__test__</code>文件夹下，在<code>__test__</code>文件夹中，我们可以看到所有有关该组件的单元测试，其中值得关注的是<code>__snapshot__</code>这个文件夹，该文件夹中存放了组件在给定条件下的 DOM 结构，这也意味着 Antd 的组件渲染测试到 DOM 这一层级截止。它认为，DOM 结构一致即可满足其对于渲染稳定性的要求。假如浏览器的渲染方式或兼容性发生改变，对于同一份 DOM 渲染结果与之前的版本不同，这时 Antd 组件就有可能出现渲染错误，但是 Antd 的单元测试并不能发现这一点。这体现了 Antd 对于渲染测试的取舍与判断。</p>
+
+<p>更细粒度的测试其实也是可以做的，比如我们可以启动一个浏览器，然后将渲染结果截图保存，之后每次运行测试，同样截图并利用类似 Resemble.js 之类的工具进行逐像素比对，这样测试能够对最终渲染视觉效果负责，但是随之而来的问题是，一像素的误差都会导致测试告警，测试在很多情况下都处于失败状态，这无疑也没有意义。因此如何取舍也是一个见仁见智的问题。</p>
+
+<p>除了渲染测试之外，View 层测试还要关注组件内 state 的变化，通常 state 的变化会由组件内部事件或者外部事件进行推动的，如点击事件，表单值改变事件或者网络请求。</p>
+
+<h3 id="toc_10">基于 React 的 View 层测试需要用到的工具</h3>
+
+<p><strong>Jest</strong></p>
+
+<p>Jest 是 Facebook 出品的一个测试框架，相对其他测试框架，其一大特点就是就是内置了常用的测试工具，比如自带断言、测试覆盖率工具，实现了开箱即用。而作为一个面向前端的测试框架， Jest 可以利用其特有的快照测试功能，通过比对 UI 代码生成的快照文件，实现对 React 等常见框架的自动测试。此外， Jest 的测试用例是并行执行的，而且只执行发生改变的文件所对应的测试，提升了测试速度。目前在 Github 上其 star 数已经破万；而除了 Facebook 外，业内其他公司也开始从其它测试框架转向 Jest ，比如 Airbnb 的尝试 ，相信未来 Jest 的发展趋势仍会比较迅猛。</p>
+
+<p>Jest 可以通过 npm 或 yarn 进行安装。以 npm 为例，既可用<code>npm install -g jest</code>进行全局安装；也可以只局部安装、并在 package.json 中指定 test 脚本：</p>
+
+<pre><code class="language-javascript">{
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;jest&quot;
+  }
+}
+</code></pre>
+
+<p><strong>Jest的基本使用</strong><br/>
+表示测试用例是一个测试框架提供的最基本的 API ， Jest 内部使用了 Jasmine 2 来进行测试，故其用例语法与 Jasmine 相同。test()函数来描述一个测试用例，举个简单的例子：</p>
+
+<pre><code class="language-javascript">// hello.js
+module.exports = () =&gt; &#39;Hello world&#39;
+// hello.test.js
+let hello = require(&#39;hello.js&#39;)
+
+test(&#39;should get &quot;Hello world&quot;&#39;, () =&gt; {
+    expect(hello()).toBe(&#39;Hello world&#39;) // 测试成功
+    // expect(hello()).toBe(&#39;Hello&#39;) // 测试失败
+})
+</code></pre>
+
+<p>其中<code>toBe(&#39;Hello world&#39;)</code>便是一句断言（ Jest 管它叫 “matcher” ，想了解更多 matcher 请参考文档）。写完了用例，运行在项目目录下执行<code>npm test</code>，即可看到测试结果：<br/>
+<img src="media/15788956558872/15788971584009.jpg" alt=""/><br/>
+若测试失败，会标识出失败的断言位置，结果如下：<br/>
+<img src="media/15788956558872/15788971761474.jpg" alt=""/><br/>
+Jest中，你还可以对每个测试前需要做的工作和测试后需要做的工作进行统一处理，对测试文件中所有的用例进行统一的预处理，可以使用 <code>beforeAll()</code> 函数；而如果想在每个用例开始前进行都预处理，则可使用 <code>beforeEach()</code> 函数。至于后处理，也有对应的 <code>afterAll()</code> 和 <code>afterEach()</code> 函数。</p>
+
+<p>如果只是想对某几个用例进行同样的预处理或后处理，可以将先将这几个用例归为一组。使用 <code>describe()</code> 函数即可表示一组用例，再将上面提到的四个处理函数置于 <code>describe()</code> 的处理回调内，就实现了对一组用例的预处理或后处理：</p>
+
+<pre><code class="language-javascript">describe(&#39;test testObject&#39;, () =&gt; {
+    beforeAll(() =&gt; {
+        // 预处理操作
+    })
+
+    test(&#39;is foo&#39;, () =&gt; {
+       expect(testObject.foo).toBeTruthy()
+    })
+
+    test(&#39;is not bar&#39;, () =&gt; {
+        expect(testObject.bar).toBeFalsy()
+    })
+
+    afterAll(() =&gt; {
+        // 后处理操作
+    })
+})
+</code></pre>
+
+<p>我们还可以使用 jest 测试异步代码。异步代码的测试关键在于告知测试框架，待测的异步代码如何完成。Jest提供了两种常见的异步代码调用方式的测试方法。</p>
+
+<p>回调函数：</p>
+
+<pre><code class="language-javascript">// asyncHello.js
+module.exports = (name, cb) =&gt; setTimeout(() =&gt; cb(`Hello ${name}`), 1000)
+// asyncHello.test.js
+let asyncHello = require(&#39;asyncHello.js&#39;)
+
+test(&#39;should get &quot;Hello world&quot;&#39;, (done) =&gt; {
+    asyncHello(&#39;world&#39;, (result) =&gt; {
+        expect(result).toBe(&#39;Hello world&#39;)
+        done()
+    })
+})
+</code></pre>
+
+<p>jest会给测试函数注入done函数，你只需要在回调函数执行末尾调用done函数，即可告诉jest，改异步调用已经完成。</p>
+
+<p>Promise：</p>
+
+<pre><code class="language-javascript">// promiseHello.js
+module.exports = (name) =&gt; {
+    return new Promise((resolve) =&gt; {
+        setTimeout(() =&gt; resolve(`Hello ${name}`), 1000)
+    })
+}
+// promiseHello.test.js
+let promiseHello = require(&#39;promiseHello.js&#39;)
+
+it(&#39;should get &quot;Hello world&quot;&#39;, () =&gt; {
+    expect.assertions(1); // 确保至少有一个断言被调用，否则测试失败
+    return promiseHello(&#39;world&#39;).then((data) =&gt; {
+        expect(data).toBe(&#39;Hello world&#39;)
+    })
+})
+</code></pre>
+
+<p>对于Promise形式的异步执行方式，可以直接在promise之后的then中进行断言。</p>
+
+<p>另外，jest还支持async/await的异步执行方式，与同步一样，只需要在await后直接断言即可。</p>
+
+<p>Jest还通过集成Istanbul支持了测试覆盖率统计。可以通过增加命令行参数 --coverage 实现，也可在 package.json 文件中进行更详细的配置。</p>
+
+<pre><code class="language-javascript">// branches.js
+module.exports = (name) =&gt; {
+    if (name === &#39;Levon&#39;) {
+        return `Hello Levon`
+    } else {
+        return `Hello ${name}`
+    }
+}
+// branches.test.js
+let branches = require(&#39;../branches.js&#39;)
+
+describe(&#39;Multiple branches test&#39;, ()=&gt; {
+    test(&#39;should get Hello Levon&#39;, ()=&gt; {
+          expect(branches(&#39;Levon&#39;)).toBe(&#39;Hello Levon&#39;)
+    });
+    // test(&#39;should get Hello World&#39;, ()=&gt; {
+    // expect(branches(&#39;World&#39;)).toBe(&#39;Hello World&#39;)
+    // });  
+})
+</code></pre>
+
+<p>运行 <code>jest --coverage</code> 可看到在根目录下生成一个测试覆盖率报告目录 <code>coverage</code> ，打开其中的 <code>index.html</code> ：<br/>
+<img src="media/15788956558872/15788973731461.jpg" alt=""/><br/>
+该网页展示了代码覆盖率和未测试的行数，具体统计方式可以查看Istanbul的详细说明。</p>
+
+<p>如果我们去掉 branches.test.js 中的注释，测试覆盖率则变成100%：<br/>
+<img src="media/15788956558872/15788973853477.jpg" alt=""/><br/>
+<strong>react-test-renderer</strong></p>
+
+<p>Jest提供了快照测试功能，而 react-test-renderer 可以根据 React 的 Virtual DOM 结构生成一个符合 Jest 规范的快照，如此，便可以对渲染结果进行基于 DOM 的比对：</p>
+
+<pre><code class="language-javascript">import React from &#39;react&#39;;
+import Link from &#39;../Link.react&#39;;
+import renderer from &#39;react-test-renderer&#39;;
+
+it(&#39;renders correctly&#39;, () =&gt; {
+    const tree = renderer.create(
+        &lt;Link page=&quot;http://www.facebook.com&quot;&gt;Facebook&lt;/Link&gt;
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+});
+</code></pre>
+
+<p>我们先构造上述测试，运行后得到下述快照文件：</p>
+
+<pre><code class="language-javascript">exports[`renders correctly 1`] = `
+&lt;a
+    className=&quot;normal&quot;
+    href=&quot;http://www.facebook.com&quot;
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+&gt;
+    Facebook
+&lt;/a&gt;
+`;
+</code></pre>
+
+<p>这个可读的快照文件以可读的形式展示了 React 渲染出的 DOM 结构。相比于肉眼观察效果的 UI 测试，快照测试直接由Jest进行比对、速度更快；而且由于直接展示了 DOM 结构，也能让我们在检查快照的时候，快速、准确地发现问题。</p>
+
+<p><strong>Enzyme &amp; React Testing Library</strong></p>
+
+<p>Jest 提供了单元测试最基本的一些功能：独立的测试环境，统一的setup、teardown，断言库，异步测试功能，函数 mock 、stub 和 spy，测试覆盖率统计等，但是我们的View层测试还是需要将 React 组件进行渲染，并在渲染的组件上进行一些操作的。React 官方提供了 Test Utility，而 Enzyme 和 React Testing Library 则是在官方的 Test Utility 基础之上进行了封装，使得测试更加方便。</p>
+
+<p>Enzyme 介绍的文章较 React Testing Library 更多，但是在 React 16 出现后，尤其是 React Hooks 出现后，Enzyme采取的打补丁的适配方式有一些根本问题无法解决。React Testing Library在FAQ中谈了关于Enzyme的一些看法：</p>
+
+<p>What about enzyme is &quot;bloated with complexity and features&quot; and &quot;encourage poor testing practices&quot;?</p>
+
+<p>Most of the damaging features have to do with encouraging testing implementation details. Primarily, these are shallow rendering, APIs which allow selecting rendered elements by component constructors, and APIs which allow you to get and interact with component instances (and their state/properties) (most of enzyme&#39;s wrapper APIs allow this).</p>
+
+<p>The guiding principle for this library is:</p>
+
+<p>The more your tests resemble the way your software is used, the more confidence they can give you. - 17 Feb 2018</p>
+
+<p>React Testing Library的作者认为测试应当模仿用户使用产品时进行的操作，而非对实现细节进行测试。即应当进行黑盒测试而非白盒。</p>
+
+<p><a href="https://testing-library.com/docs/recipes">官网的 recipe</a> 是单元测试非常不错的指南，值得一看。</p>
+
+<h2 id="toc_11">Model层单元测试</h2>
+
+<p>前端的Model层有一个更加广为人知的名字：状态管理。细说起来又是流派之争：以单向数据流和函数式思想为基石的Redux，同样受单向数据流影响，但又受到响应式编程启发的MobX，FPR流派代表的Rxjs。然后由于Redux并不支持异步操作，于是又孕育而生许多异步中间件以增强Redux的功能比如redux-thunk，redux-saga，redux-observer等等。斯坦福大学iOS开发课上，教授介绍MVC时说了这么一句话：Model定义了软件应用。那么由此可见，不同的应用下，不同的Model层解决方案应该各有其优势与劣势。</p>
+
+<p>我们以Redux为例说明Model层测试的关注点。在Redux中我们通常会分开测试reducer和actionCreator。Reducer必是纯函数，所以其测试相对容易，通常也不会有什么外部依赖出现，即使存在，由于其纯函数特性，也很容易进行mock。而actionCreator相对复杂，由于使用不同的中间件，actionCreator的形式差别会很大，但是归根究底，就是要测试其在各个流程中是否能如预期的那样完成各个异步操作，并创建出符合预期的，最终交付给reducer的action对象。</p>
+
+<p>Model层测试常见的工具除了View层也需要用到的Jest测试框架外，还需要根据工程中的Model层库选型选择相对应的工具，这些工具的主要目的是为了提供一些测试辅助的手段，比如Redux的测试需要创造一个假的store来使整个程序能够运行起来。RxJS则需要模拟其复杂的异步事件流，即「弹珠测试」。</p>
+
+<h2 id="toc_12">ViewModel层单元测试</h2>
+
+<p>我所理解的ViewModel层，更多的是一些数据接口，数据格式转换，数据校验等等之类的工具性质的函数。由于后端接口给我们的数据与真正页面上展示的形式通常有较大的差异，我们需要在真正将数据给到View层之前，经过ViewModel层进行转化。同样的，由于用户在页面上进行的输入信息有时也会不符合软件定义，错误的用户输入会造成系统安全隐患，因此也需要在ViewModel层对用户输入的数据进行校验。</p>
+
+<p>由于ViewModel层的纯函数性质，通常只需要Jest库即可进行，过程一般比较简单，在此就不赘述。</p>
 
                         
                       </div>
@@ -195,7 +454,7 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15788933924935.html">测试文章</a>
+			        <a href="15788956558872.html">前端组件单元测试</a>
 			      </li>
 		     
 		   
