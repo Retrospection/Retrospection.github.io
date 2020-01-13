@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[始前终后]]></title>
+  <link href="https://retrospection.github.io/atom.xml" rel="self"/>
+  <link href="https://retrospection.github.io/"/>
+  <updated>2020-01-13T13:51:06+08:00</updated>
+  <id>https://retrospection.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[测试文章]]></title>
+    <link href="https://retrospection.github.io/15788933924935.html"/>
+    <updated>2020-01-13T13:29:52+08:00</updated>
+    <id>https://retrospection.github.io/15788933924935.html</id>
+    <content type="html"><![CDATA[
+<p>这是一篇测试文章</p>
+
+]]></content>
+  </entry>
+  
+</feed>
