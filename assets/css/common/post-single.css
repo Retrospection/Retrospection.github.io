@@ -92,7 +92,7 @@
 .post-content p,
 .post-content figure,
 .post-content ul {
-    margin-bottom: var(--content-gap);
+    margin-bottom: 4px;
 }
 
 .post-content ol,
