@@ -1,0 +1,41 @@
+baseURL: "/"
+languageCode: "en-US"
+title: "回忆补时"
+theme: "PaperMod"
+enableRobotsTXT: true
+languages:
+  en:
+    languageName: "中文"
+    weight: 1
+    menu:
+      main:
+        - name: Archive
+          url: archives
+          weight: 5
+params:
+  ShowBreadCrumbs: true
+  ShowToc: true
+  ShowReadingTime: true
+  homeInfoParams:
+    Title: "Retros." # optional default will be site title
+    Content: "——神即道，道法自然，如来"
+  profileMode:
+    enabled: false
+    title: "Retros." # optional default will be site title
+    subtitle: "神即道，道法自然，如来"
+    imageUrl: "https://cdn.jellow.site/FsWG8oQhxcc5a9X41VMmgrFlYurvv2.png" # optional
+    imageTitle: "" # optional
+    imageWidth: 240 # custom size
+    imageHeight: 240 # custom size
+    buttons:
+      - name: Archive
+        url: "/archives"
+      - name: Github
+        url: "https://github.com/Retrospection"
+  
+
+outputs:
+  home:
+    - HTML
+    - RSS
+
