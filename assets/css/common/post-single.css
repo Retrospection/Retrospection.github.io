@@ -33,7 +33,7 @@
 }
 
 .post-content {
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 32px;
     color: var(--content);
 }
@@ -93,7 +93,6 @@
 .post-content figure,
 .post-content ul {
     margin-bottom: 8px;
-    line-height: 24px;
 }
 
 .post-content ol,
