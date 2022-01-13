@@ -1,9 +1,10 @@
-{
-    "title": "解决 Windows 11 PowerShell 禁止运行脚本问题",
-    "summary": "通过配置注册表，一劳永逸地解决 PowerShell",
-    "date": "2022-01-12T23:01:07+08:00",
-    "draft": false
-}
+---
+title: "解决 Windows 11 PowerShell 禁止运行脚本问题"
+summary: 通过配置注册表，一劳永逸地解决 PowerShell
+date: 2022-01-12T23:01:07+08:00
+draft: false
+---
+
 
 
 最近入手了一台新的 windows 电脑作为工作外学习研究的主力机，在配置开发环境时，遇到了 PowerShell 禁止运行脚本问题。
