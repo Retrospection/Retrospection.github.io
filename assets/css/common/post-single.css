@@ -33,6 +33,7 @@
 }
 
 .post-content {
+    font-size: 14px;
     margin-top: 32px;
     color: var(--content);
 }
