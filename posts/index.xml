@@ -6,7 +6,19 @@
     <description>Recent content in Posts on 回忆补时</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 20 Feb 2022 21:01:08 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Mar 2022 16:50:00 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从2-3树到红黑树</title>
+      <link>/posts/from-two-three-tree-to-rbtree/</link>
+      <pubDate>Sun, 13 Mar 2022 16:50:00 +0800</pubDate>
+      
+      <guid>/posts/from-two-three-tree-to-rbtree/</guid>
+      <description>在上一篇文章中，我们讨论了一种严格平衡的平衡查找树 AVL 树，本文来看一个在实际场景中运用更多的平衡查找树——红黑树。
+本文所解析的红黑树并非一般意义上的更一般化的红黑树，解析的是源自《算法》第四版中由 2-3 树变化而来的左偏红黑树。感兴趣的读者可以在理解了本文所阐释的左偏红黑树后，再去理解更一般的红黑树，相信能够更容易理解。
+2-3树 2-3 树的思想不仅仅有利于帮助我们理解左偏红黑树，也有利于我们去理解 B 树——一种其变种被广泛用于数据库索引领域的更宽的平衡树。 简单来说，2-3 树就是这样一种树：它的节点可能有两个孩子，也可能有三个孩子。对于两个孩子的节点，其左子节点小于根节点的值，右子节点大于根节点的值。这个与普通二叉搜索树一致，很容易理解。对于三个孩子的节点，其实也很容易理解。如果我们将三个孩子节点中包含的两个值分别称为 A 和 B，那么第一孩子的值全部 小于 A，第三孩子的值全部 大于 B，第二孩子的值介于 A 和 B 之间。大概就是如下图所示： 但 2-3 树的构建过程与前面的普通二叉搜索树，以及 AVL 树不同，它是由下至上构建的。具体来说，2-3 树的插入规则可以这么理解：
+ 如果插入的节点是 2 节点，则生成一个新的键，使其变为 3 节点 如果插入的节点是 3 节点，则同样生成一个新的键，使其变为 4 节点，然后再进行调整：  如果这个 4 节点是 2 节点的孩子，那么提取中间的键到父节点，使父节点变成 3 节点 如果这个 4 节点 是 3 节点的孩子，依旧提取中间的键到父节点，使父节点变成 4 节点，递归此过程 如果 4 节点是根节点，则将其分解成两个 2 节点，以及一个 2 节点的根节点    如果想要了解 2-3 树是如何保证全局的有序性与平衡性的，可以参阅 《算法》第四版 P272-273，本文在此就不赘述。</description>
+    </item>
+    
     <item>
       <title>AVL树</title>
       <link>/posts/avl-tree/</link>
