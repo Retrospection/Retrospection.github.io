@@ -216,7 +216,7 @@
 <h1 id="2-3树">2-3树<a hidden class="anchor" aria-hidden="true" href="#2-3树">#</a></h1>
 <p>2-3 树的思想不仅仅有利于帮助我们理解左偏红黑树，也有利于我们去理解 B 树——一种其变种被广泛用于数据库索引领域的更宽的平衡树。
 简单来说，2-3 树就是这样一种树：它的节点可能有两个孩子，也可能有三个孩子。对于两个孩子的节点，其左子节点小于根节点的值，右子节点大于根节点的值。这个与普通二叉搜索树一致，很容易理解。对于三个孩子的节点，其实也很容易理解。如果我们将三个孩子节点中包含的两个值分别称为 A 和 B，那么第一孩子的值全部 小于 A，第三孩子的值全部 大于 B，第二孩子的值介于 A 和 B 之间。大概就是如下图所示：
-<img loading="lazy" src="https://cdn.nlark.com/yuque/0/2022/png/141364/1647160304268-2c58a264-2487-4f55-a351-e806867331e2.png#clientId=ub22a2d22-5c31-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;height=246&amp;id=ua873b3bc&amp;margin=%5Bobject%20Object%5D&amp;name=Screenshot_2022-03-13-15-23-28-405_com.newskyer.draw.png&amp;originHeight=595&amp;originWidth=1532&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=true&amp;size=50133&amp;status=done&amp;style=none&amp;taskId=ue724eafb-e79c-4f34-bbdb-ef6655ce561&amp;title=2-3%20%E6%A0%91%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%8A%82%E7%82%B9&amp;width=633" alt="Screenshot_2022-03-13-15-23-28-405_com.newskyer.draw.png"  title="2-3 树的两种节点"  />
+<img loading="lazy" src="/from-two-three-tree-to-rbtree/Screenshot_2022-03-13-15-23-28-405_com.newskyer.draw.png" alt="Screenshot_2022-03-13-15-23-28-405_com.newskyer.draw.png"  />
 
 但 2-3 树的构建过程与前面的普通二叉搜索树，以及 AVL 树不同，它是由下至上构建的。具体来说，2-3 树的插入规则可以这么理解：</p>
 <ul>
@@ -229,7 +229,7 @@
 </ul>
 </li>
 </ul>
-<p><img loading="lazy" src="https://cdn.nlark.com/yuque/0/2022/png/141364/1647160345995-cc7cb7f4-7c05-487c-9518-d7c1f9313fa3.png#clientId=ub22a2d22-5c31-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=u53ea81df&amp;margin=%5Bobject%20Object%5D&amp;name=Screenshot_2022-03-13-16-07-47-053_com.newskyer.draw.png&amp;originHeight=1299&amp;originWidth=1733&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=true&amp;size=139028&amp;status=done&amp;style=none&amp;taskId=ub6b5c90e-60c7-4445-874d-c73c3902210&amp;title=2-3%20%E6%A0%91%E8%8A%82%E7%82%B9%E5%88%86%E8%A3%82%E7%9A%84%204%20%E7%A7%8D%E6%83%85%E5%86%B5" alt="Screenshot_2022-03-13-16-07-47-053_com.newskyer.draw.png"  title="2-3 树节点分裂的 4 种情况"  />
+<p><img loading="lazy" src="/from-two-three-tree-to-rbtree/Screenshot_2022-03-13-16-07-47-053_com.newskyer.draw.png" alt="Screenshot_2022-03-13-16-07-47-053_com.newskyer.draw.png"  />
 
 如果想要了解 2-3 树是如何保证全局的有序性与平衡性的，可以参阅 《算法》第四版 P272-273，本文在此就不赘述。</p>
 <blockquote>
@@ -237,7 +237,7 @@
 </blockquote>
 <h1 id="红黑树">红黑树<a hidden class="anchor" aria-hidden="true" href="#红黑树">#</a></h1>
 <p>我们有了一颗十分平衡的 2-3 树，现在需要将这棵 2-3 树变成红黑树，那么我们只需要将所有的 3 节点拆成两个节点即可。
-<img loading="lazy" src="https://cdn.nlark.com/yuque/0/2022/png/141364/1647160393549-a04bb17f-9294-43b2-9c79-2e3af60073ce.png#clientId=ub22a2d22-5c31-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=ubbb0fa23&amp;margin=%5Bobject%20Object%5D&amp;name=Screenshot_2022-03-13-16-10-33-593_com.newskyer.draw.png&amp;originHeight=712&amp;originWidth=1863&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=true&amp;size=68623&amp;status=done&amp;style=none&amp;taskId=u06b2d705-1cce-42bc-955b-8d94eb3fc61&amp;title=%E8%BF%99%E9%87%8C%E6%8F%8F%E8%BF%B0%E4%BA%86%202-3%20%E6%A0%91%E7%9A%84%203%20%E8%8A%82%E7%82%B9%E5%A6%82%E4%BD%95%E5%92%8C%E5%B7%A6%E5%81%8F%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E7%BA%A2%E8%8A%82%E7%82%B9%E5%AF%B9%E5%BA%94" alt="Screenshot_2022-03-13-16-10-33-593_com.newskyer.draw.png"  title="这里描述了 2-3 树的 3 节点如何和左偏红黑树的红节点对应"  />
+<img loading="lazy" src="/from-two-three-tree-to-rbtree/Screenshot_2022-03-13-16-10-33-593_com.newskyer.draw.png" alt="Screenshot_2022-03-13-16-10-33-593_com.newskyer.draw.png"  />
 
 可以看出，上图相当于我们对原 2-3 树做这样的一个变换：</p>
 <ul>
@@ -254,11 +254,11 @@
 <h2 id="旋转平衡调整">旋转（平衡调整）<a hidden class="anchor" aria-hidden="true" href="#旋转平衡调整">#</a></h2>
 <p>那么红黑树的再平衡是怎么操作的呢？我们还是需要从 2-3 树的再平衡上去找答案。首先我们需要记住一个规则是：所有新加的节点都是红色节点。原因是，假设我们思考一个 2-3 树，所有添加行为都会让 2 节点变成 3 节点，或者让 3 节点变成临时的 4 节点。因此，新增节点的颜色必然是红色。</p>
 <p>然后我们看图：</p>
-<p><img loading="lazy" src="https://cdn.nlark.com/yuque/0/2022/jpeg/141364/1647160638956-9a60a84c-e16f-4930-8c45-ffb66b9c9344.jpeg#clientId=udb3a64c6-a026-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;height=513&amp;id=u5255de0b&amp;margin=%5Bobject%20Object%5D&amp;name=%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220313163654.jpg&amp;originHeight=2004&amp;originWidth=2244&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=716201&amp;status=done&amp;style=none&amp;taskId=uc0c3c948-5d72-461b-906b-43e06b9590a&amp;title=&amp;width=574" alt="微信图片_20220313163654.jpg"  />
+<p><img loading="lazy" src="/from-two-three-tree-to-rbtree/%e5%be%ae%e4%bf%a1%e5%9b%be%e7%89%87_20220313163654.jpg" alt="微信图片_20220313163654.jpg"  />
 
-<img loading="lazy" src="https://cdn.nlark.com/yuque/0/2022/jpeg/141364/1647160656855-728e01ea-586a-4944-b0d6-ca238a3bf159.jpeg#clientId=udb3a64c6-a026-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;height=764&amp;id=u27008ca2&amp;margin=%5Bobject%20Object%5D&amp;name=%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220313163651.jpg&amp;originHeight=3000&amp;originWidth=2250&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=825091&amp;status=done&amp;style=none&amp;taskId=uc550b463-57d5-4b3f-95b0-67770bad477&amp;title=&amp;width=573" alt="微信图片_20220313163651.jpg"  />
+<img loading="lazy" src="/from-two-three-tree-to-rbtree/%e5%be%ae%e4%bf%a1%e5%9b%be%e7%89%87_20220313163651.jpg" alt="微信图片_20220313163651.jpg"  />
 
-<img loading="lazy" src="https://cdn.nlark.com/yuque/0/2022/jpeg/141364/1647160675428-ae1729d6-7828-4820-bc2d-92368375bf8a.jpeg#clientId=udb3a64c6-a026-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;height=439&amp;id=u357e7f16&amp;margin=%5Bobject%20Object%5D&amp;name=%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220313163640.jpg&amp;originHeight=2246&amp;originWidth=2996&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=1410323&amp;status=done&amp;style=none&amp;taskId=u28772a89-47b9-4c56-9153-2a193908381&amp;title=&amp;width=585" alt="微信图片_20220313163640.jpg"  />
+<img loading="lazy" src="/from-two-three-tree-to-rbtree/%e5%be%ae%e4%bf%a1%e5%9b%be%e7%89%87_20220313163640.jpg" alt="微信图片_20220313163640.jpg"  />
 </p>
 <p>其中有几个图需要注意一下，一个是等效 3 节点右侧插入一个元素时，这里相当于直接新增一个元素并且做了一个反色。反色操作是相对 AVL 树多出来的一个操作。</p>
 <h1 id="红黑树实现源码">红黑树实现源码<a hidden class="anchor" aria-hidden="true" href="#红黑树实现源码">#</a></h1>
